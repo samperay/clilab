@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Define a function to display a greeting
+greet_user() {
+  local name=${1:-"Guest"} # Use "Guest" as default if no name is provided
+  echo "Hello, $name! Welcome to the CLI Tool."
+}
+
+# Define a function to perform a simple calculation
+calculate_sum() {
+  if [[ -z "$1" || -z "$2" ]]; then
+    echo "Error: Please provide two numbers for calculation."
+    return 1
+  fi
+  local num1=$1
+  local num2=$2
+  local sum=$((num1 + num2))
+  echo "The sum of $num1 and $num2 is: $sum"
+}
+
+# Define a function to list files in the current directory
+list_files() {
+  echo "Files in the current directory:"
+  ls -l
+}
+
+# Display usage instructions
+show_help() {
+  echo "Usage: $0 <command> [arguments]"
+  echo ""
+  echo "Commands:"
+  echo "  greet [name]      - Greets the user. Optionally provide a name."
+  echo "  sum <num1> <num2> - Calculates the sum of two numbers."
+  echo "  ls                - Lists files in the current directory."
+  echo "  help              - Displays this help message."
+}
+
+# Main logic to handle commands
+main() {
+  if [[ -z "$1" ]]; then
+    show_help
+    exit 0
+  fi
+
+  local command=$1
+  shift # Remove the command from the arguments list
+
+  case "$command" in
+    greet)
+      greet_user "$@"
+      ;;
+    sum)
+      calculate_sum "$@"
+      ;;
+    ls)
+      list_files
+      ;;
+    help)
+      show_help
+      ;;
+    *)
+      echo "Error: Unknown command '$command'."
+      show_help
+      exit 1
+      ;;
+  esac
+}
+
+# Execute the main function
+main "$@"
