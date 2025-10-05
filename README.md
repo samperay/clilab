@@ -6,7 +6,7 @@ It’s designed as a learning and experimentation hub to explore scripting, auto
 ---
 
 ## 📂 Repository Structure
-
+```
 clilab/
 ├── bash/
 │ ├── hello_cli.sh
@@ -19,7 +19,7 @@ clilab/
 │ └── README.md
 │
 └── README.md
-
+```
 
 - **`bash/`** → Contains shell-based CLI tools and automation scripts.  
 - **`python/`** → Contains Python-based CLI tools using `argparse`, `click`, or `typer`.  
